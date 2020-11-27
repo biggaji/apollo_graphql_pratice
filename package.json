@@ -1,0 +1,26 @@
+{
+  "name": "apollo_graphql_pratice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biggaji/apollo_graphql_pratice.git"
+  },
+  "author": "Tobi Ajibade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biggaji/apollo_graphql_pratice/issues"
+  },
+  "homepage": "https://github.com/biggaji/apollo_graphql_pratice#readme",
+  "dependencies": {
+    "apollo-server": "^2.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "pg": "^8.5.1"
+  }
+}
