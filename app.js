@@ -1,6 +1,7 @@
 // require('dotenv').config()
 // const express = require('express');
 const { gql, ApolloServer } = require('apollo-server');
+const _ = require("lodash");
 
 // const app = express();
 
@@ -27,18 +28,24 @@ const typeDefs = gql`
         A author type returns array
         """
         authors: [Author]
-        book(id: Int): Book
 
+        "Used for getting a single book by it id"
+        book(id: Int): [Book]
+
+        "Used for getting a author book by it id"
         author(id: Int): Author
     }
 
     type Mutation {
+        "For adding a new book"
         addBook(data:AddBookInput) : Book
     }
 
     # A special type of object
     input AddBookInput {
+        "Book title"
         title: String
+        "Book id"
         id: Int
     }
 `;
@@ -105,7 +112,7 @@ const resolvers = {
         books: () => iwe,
         authors: () => authors,
         book: (_, args, context) => {
-            return iwe.find(bk => { return bk.id === args.id });
+            return iwe.filter(bk => { return bk.id === args.id });
         },
         author: (_, args, context) => {
             return authors.find(author => author.id === args.id);
@@ -113,12 +120,16 @@ const resolvers = {
     },
     Book: {
         author: (parent) => {
-            return authors.find(author => author.id === parent.id);
+            // return authors.find(author => author.id === parent.id);
+            // return author.id === parent.id
+            return _.find(authors, { id: parent.id })
         }
     },
     Author: {
         books: (parent) => {
-            return iwe.find(books => books.id === parent.id);
+            // return iwe.find(books => books.id === parent.id);
+            // return iwe.id === parent.id
+            return _.filter(iwe, { id: parent.id })
         }
     },
     Mutation: {
