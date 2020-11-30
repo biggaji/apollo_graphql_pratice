@@ -14,6 +14,7 @@ const typeDefs = gql`
 
     type Author {
         name: String
+        id: Int
         books: [Book]
     }
 
@@ -66,6 +67,22 @@ const iwe = [
     },
     {
         title: "The algorithms",
+        id: 1
+    },
+    {
+        title: "Ass holes",
+        id: 1
+    },
+    {
+        title: "The Grannies",
+        id: 2
+    },
+    {
+        title: "Older the berries, Sweeter the Juice",
+        id: 2
+    },
+    {
+        title: "Sugar Daddy",
         id: 2
     }
 ];
