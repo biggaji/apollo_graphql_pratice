@@ -1,7 +1,8 @@
 // const _ = require('lodash');
 const { db } = require('../configs/databaseConfigs');
 const { genuuid } = require('../utils/genuuid');
-
+const jwt = require('jsonwebtoken');
+// Resolver maps
 const resolvers = {
     Query: {
         author: async (_, { authorid }, context) => {
@@ -23,11 +24,13 @@ const resolvers = {
         }
     },
     Mutation: {
-        create_author: async (_, args, context) => {
+        create_author: async (_, args, { req, res }) => {
             try {
                 const { email, full_name, username, password } = args;
                 const authorid = await genuuid();
                 const data = await db.query("INSERT INTO author (authorid,email,full_name,username,password) VALUES ($1,$2,$3,$4,$5) RETURNING *", [authorid, email, full_name, username, password]);
+                const token = await jwt.sign({ authorid: data.rows[0].authorid }, process.env.JWT_SECRET, { expiresIn: "1d" });
+                // res.cookie("a_user", token, {httpOnly:true});
                 return data.rows[0];
             } catch (error) {
                 return error;

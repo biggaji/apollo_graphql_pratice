@@ -5,12 +5,12 @@ const typeDefs = gql`
     type Author {
         full_name:String!
         author_id:String!
-        avatar:String
+        avatar:String!
         email:String!
-        username:String
+        username:String!
         follower:Int
         following:Int
-        location:String
+        location:String!
         twitter_handle:String
         instagram_handle:String
         facebook_handle:String
@@ -30,7 +30,7 @@ const typeDefs = gql`
     "Avatar type"
     type Avatar {
         size: AvatarSize
-        avatar:Author
+        avatar:String
     }
 
     "Enum for avatar sizes"
